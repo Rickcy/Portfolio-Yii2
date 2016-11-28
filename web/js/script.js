@@ -8,6 +8,8 @@
 
 
 
+
+
     $('.skills').waypoint(function(){
         $('.chart').each(function(){
             $(this).easyPieChart({
@@ -26,3 +28,4 @@ wow = new WOW({
     mobile: false
 });
 wow.init();
+$( '#cbp-qtrotator' ).cbpQTRotator();

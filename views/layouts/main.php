@@ -81,9 +81,7 @@ AppAsset::register($this);
 
                     </ul>
 
-                    <p class="heart wow slideInRight">
-                        Made with <span class="fa fa-heart fa-2x animated pulse"></span> in Russia
-                    </p>
+                    
                     <p class="copyright wow slideInLeft">
                         © 2016 Евгений Куденко
                     </p>

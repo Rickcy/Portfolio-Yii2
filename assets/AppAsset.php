@@ -29,6 +29,9 @@ class AppAsset extends AssetBundle
         'js/waypoints.min.js',
         'js/jquery.easypiechart.js',
         'js/script.js',
+        'js/jquery.parallax-1.1.3.js',
+        'js/jquery.cbpQTRotator.js',
+        'js/modernizr.custom.js'
 
 
 

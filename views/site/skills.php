@@ -6,7 +6,7 @@ $this->title = 'Skills | Personal Page Portfolio';
 ?>
 <div class="site-page">
     <section id="services" class="pfblock pfblock-gray">
-        <div class="col-lg-12">
+        <div class="container">
             <div class="row">
 
                 <div class="col-sm-6 col-sm-offset-3">
@@ -88,7 +88,7 @@ $this->title = 'Skills | Personal Page Portfolio';
 
 
         <div class="row skills">
-            <div class="col-lg-12">
+            <div class="container">
             <div class="row">
 
                 <div class="col-sm-6 col-sm-offset-3">
