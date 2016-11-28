@@ -6,6 +6,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -45,7 +46,25 @@ $config = [
             'rules' => [
             ],
         ],
-
+        'mail' => [
+            'class'            => 'zyx\phpmailer\Mailer',
+            'viewPath'         => '@common/mail',
+            'useFileTransport' => false,
+            'config'           => [
+                'mailer'     => 'smtp',
+                'host'       => 'smtp.yandex.ru',
+                'port'       => '465',
+                'smtpsecure' => 'ssl',
+                'smtpauth'   => true,
+                'username'   => 'Rickcy@yandex.ru',
+                'password'   => 'Rickcy27',
+                'isHtml'     => true,
+                'charset'    => 'UTF-8'
+            ]
+        ],
+        'common' =>[
+            'class' => 'component\Common'
+        ]
     ],
     'params' => $params,
 ];

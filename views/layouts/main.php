@@ -45,21 +45,14 @@ AppAsset::register($this);
 
             ['label' => '<i class="fa fa-info"></i>  Skills', 'url' => ['/site/skills']],
             ['label' => '<i class="fa fa-bookmark"></i>   Works', 'url' => ['/site/works']],
-            ['label' => '<i class="fa fa-font"></i>   Reviews', 'url' => ['/site/reviews']],
+           // ['label' => '<i class="fa fa-font"></i>   Reviews', 'url' => ['/site/reviews']],
             ['label' => '<i class="fa fa-comment"></i>  Feedback', 'url' => ['/site/feedback']],
             ['label' => '<i class="fa fa-github-alt"></i>   Github', 'url' => 'https://github.com/Rickcy'],
             Yii::$app->user->isGuest ? (
                 ''
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+            ) :
+            ['label' => '<i class="fa fa-sign-out" style="font-size: 15pt"></i> ', 'url' => ['/site/logout'], 'post']
+
         ],
     ]);
     NavBar::end();
@@ -81,7 +74,7 @@ AppAsset::register($this);
 
                     </ul>
 
-                    
+
                     <p class="copyright wow slideInLeft">
                         © 2016 Евгений Куденко
                     </p>

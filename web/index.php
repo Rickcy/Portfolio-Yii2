@@ -9,4 +9,9 @@ require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
 $config = require(__DIR__ . '/../config/web.php');
 
-(new yii\web\Application($config))->run();
+$service = new \yii\di\ServiceLocator();
+$service->set("cache",'common\cache\Base64Cache');
+
+$application = new yii\web\Application($config);
+$application->set('locator',$service);
+$application->run();
