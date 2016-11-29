@@ -1,8 +1,15 @@
-<div class="pfblock pfblock-gray">
-    <div class="container">
-<div class="cabinet-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-   
-</div>
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Dashboard</h1>
+        </div>
     </div>
-</div>
+
+
+	<!--/.main-->

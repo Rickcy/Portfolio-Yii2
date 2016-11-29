@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class SkillsController extends Controller
 {
+    public $layout = '/cabinet';
     /**
      * @inheritdoc
      */
