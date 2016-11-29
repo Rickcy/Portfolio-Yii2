@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Slils | Personal Page Portfolio';
+$this->title = 'My Works | Personal Page Portfolio';
 
 ?>
 

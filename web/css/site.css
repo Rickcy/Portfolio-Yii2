@@ -47,6 +47,10 @@ h2 {
 }
 
 
+.wrap{
+    margin-top: 50px;
+}
+
 /**
  * Footer
  */
@@ -247,8 +251,25 @@ body{
     z-index: 0;
 
 }
+
+.alert-success{
+    margin-top: 60px;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+}
+.photo img{
+    min-width: 100px;
+    border-radius: 50%;
+    opacity: .9;
+    border: 3px solid #cecece;
+    -webkit-box-shadow:  0 0 15px #9a9a9a;
+    -moz-box-shadow:   0 0 15px #9a9a9a;
+    box-shadow:   0 0 15px #9a9a9a;
+}
 .pfblock {
-    padding: 80px 0 50px;
+    padding: 10px 0 20px;
 }
 
 .pfblock-gray {
@@ -519,7 +540,7 @@ figure.effect-bubba:hover p {
 }
 .percent {
     display: inline-block;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 300;
     line-height: 140px;
     z-index: 2;
@@ -542,7 +563,7 @@ figure.effect-bubba:hover p {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    padding: 50px 0;
+    padding: 30px 0;
     color: #999;
 }
 

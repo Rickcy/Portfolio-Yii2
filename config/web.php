@@ -6,7 +6,12 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-
+    'language' => 'ru',
+    'modules' => [
+        'cabinet' => [
+            'class' => 'app\modules\cabinet\Module',
+            ],
+        ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -48,7 +53,7 @@ $config = [
         ],
         'mail' => [
             'class'            => 'zyx\phpmailer\Mailer',
-            'viewPath'         => '@common/mail',
+            'viewPath'         => '/mail',
             'useFileTransport' => false,
             'config'           => [
                 'mailer'     => 'smtp',
@@ -63,8 +68,9 @@ $config = [
             ]
         ],
         'common' =>[
-            'class' => 'component\Common'
+            'class' => 'app\component\Common'
         ]
+
     ],
     'params' => $params,
 ];

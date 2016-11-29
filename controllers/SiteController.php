@@ -2,12 +2,13 @@
 
 namespace app\controllers;
 
+use app\component\Common;
 use app\models\ContactForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use component\Common;
+
 use app\models\LoginForm;
 
 
@@ -94,11 +95,12 @@ class SiteController extends Controller
     public function actionFeedback(){
         $model = new ContactForm();
         if($model->load(Yii::$app->request->post()) && $model->validate()){
-            $body ='<div>Body : <b>'.$model->body.'</b></div>';
-            $body .='<div>Email : <b>'.$model->email.'</b></div>';
+            $body ='<div>'.$model->body.'</div>';
+            $body .='<p><div>Имя отправителя : '.$model->name.'</div><br>';
+            $body .='<div>E-mail : '.$model->email.'</div><br></p>';
             Yii::$app->common->sendMail($model->subject,$body);
-            print "Send Success";
-            die();
+            Yii::$app->session->setFlash('success', 'Спасибо за ваше письмо. Мы свяжемся с вами в ближайшее время.');
+            return $this->redirect('/');
         }
 
         return $this->render('feedback',['model'=>$model]);

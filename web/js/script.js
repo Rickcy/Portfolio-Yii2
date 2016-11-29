@@ -13,8 +13,8 @@
     $('.skills').waypoint(function(){
         $('.chart').each(function(){
             $(this).easyPieChart({
-                size:140,
-                animate: 2000,
+                size:130,
+                animate: 2400,
                 lineCap:'butt',
                 scaleColor: false,
                 barColor: '#FF5252',
@@ -28,4 +28,3 @@ wow = new WOW({
     mobile: false
 });
 wow.init();
-$( '#cbp-qtrotator' ).cbpQTRotator();
