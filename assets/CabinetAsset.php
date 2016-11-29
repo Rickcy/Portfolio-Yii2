@@ -25,7 +25,6 @@ class CabinetAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'app\assets\AppAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
 

@@ -3,14 +3,15 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\assets\CabinetAsset;
+use app\assets\AppAsset;
+
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Menu;
 
 
-CabinetAsset::register($this);
+
+AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -27,55 +28,39 @@ CabinetAsset::register($this);
 
 <div class="wrap">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><span>Kudenko</span>Evgeniy</a>
-                <ul class="user-menu">
-                    <li class="dropdown pull-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> User <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
-                            <li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Settings</a></li>
-                            <li><a href="#"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-        </div><!-- /.container-fluid -->
-    </nav>
-
-    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-        <?
-        echo Menu::widget([
-            'items' => [
-                ['label' => 'Dashboard', 'url' => ['/cabinet/default/index']],
-                ['label' => 'Skills', 'url' => ['/cabinet/skills/index']],
-                ['label' => 'Works', 'url' => ['/cabinet/works/index']],
-                ['label' => '<hr>'],
-                ['label' => 'Home Page', 'url' => ['/site/index']],
-
-            ],
-            'options' => ['class' => 'nav menu '],
-            'encodeLabels' => false,
-
-        ]);
-        ?>
+    <?php
+    NavBar::begin([
 
 
-    </div>
+        'options' => [
+            'class' => 'navbar-default navbar-fixed-top ',
+        ],
+
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels' => false,
+        'items' => [
+
+            ['label' => '<i class="fa fa-home"></i>   Home', 'url' => ['/site/index']],
 
 
+            ['label' => '<i class="fa fa-info"></i> Manage Skills', 'url' => ['/cabinet/skills']],
+            ['label' => '<i class="fa fa-bookmark"></i>  Manage Works', 'url' => ['/cabinet/works']],
+            // ['label' => '<i class="fa fa-font"></i>   Reviews', 'url' => ['/site/reviews']],
+            ['label' => '<i class="fa fa-github-alt"></i>   Github', 'url' => 'https://github.com/Rickcy'],
+            Yii::$app->user->isGuest ? (
+            ''
+            ) :
+                ['label' => '<i class="fa fa-sign-out" style="font-size: 15pt"></i> ', 'url' => ['/site/logout'], 'post']
+
+        ],
+    ]);
+    NavBar::end();
+    ?>
 
 
-    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="container">
     <?= $content ?>
     </div>
 </div>

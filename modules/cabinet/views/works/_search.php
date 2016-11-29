@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\WorksSearch */
+/* @var $model app\models\SearchWorks */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -21,11 +21,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'work_description') ?>
 
-    <?= $form->field($model, 'work_url') ?>
+    <?= $form->field($model, 'worl_url') ?>
 
     <?= $form->field($model, 'work_tech') ?>
 
-    <?php // echo $form->field($model, 'work_main_image') ?>
+    <?php // echo $form->field($model, 'work_image') ?>
+
+    <?php // echo $form->field($model, 'work_name_image') ?>
 
     <?php // echo $form->field($model, 'showMain') ?>
 
