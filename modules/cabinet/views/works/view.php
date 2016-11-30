@@ -27,16 +27,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+
         'attributes' => [
             'id',
             'work_name',
             'work_description',
-            'worl_url:url',
+            'work_url:url',
             'work_tech',
             'work_image',
             'work_name_image',
             'showMain',
         ],
-    ]) ?>
+    ]);
+    echo Html::img($model->getImageUrl($model->work_name), [
+        'class'=>'img-thumbnail',
+        'alt'=>$title,
+        'title'=>$title
+    ]);?>
+
 
 </div>

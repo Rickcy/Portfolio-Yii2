@@ -19,7 +19,7 @@ class SearchWorks extends Works
     {
         return [
             [['id', 'showMain'], 'integer'],
-            [['work_name', 'work_description', 'worl_url', 'work_tech', 'work_image', 'work_name_image'], 'safe'],
+            [['work_name', 'work_description', 'work_url', 'work_tech', 'work_image', 'work_name_image'], 'safe'],
         ];
     }
 
@@ -65,7 +65,7 @@ class SearchWorks extends Works
 
         $query->andFilterWhere(['like', 'work_name', $this->work_name])
             ->andFilterWhere(['like', 'work_description', $this->work_description])
-            ->andFilterWhere(['like', 'worl_url', $this->worl_url])
+            ->andFilterWhere(['like', 'work_url', $this->work_url])
             ->andFilterWhere(['like', 'work_tech', $this->work_tech])
             ->andFilterWhere(['like', 'work_image', $this->work_image])
             ->andFilterWhere(['like', 'work_name_image', $this->work_name_image]);

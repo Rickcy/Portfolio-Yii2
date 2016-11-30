@@ -5,13 +5,14 @@
 
 use app\assets\AppAsset;
 
+use app\assets\CabinetAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 
 
 
-AppAsset::register($this);
+CabinetAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

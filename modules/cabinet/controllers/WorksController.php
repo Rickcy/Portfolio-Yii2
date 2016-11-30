@@ -5,6 +5,10 @@ namespace app\modules\cabinet\controllers;
 use Yii;
 use app\models\Works;
 use app\models\SearchWorks;
+use yii\base\Exception;
+use yii\helpers\BaseFileHelper;
+use yii\helpers\FileHelper;
+use yii\imagine\Image;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -71,21 +75,58 @@ class WorksController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             // process uploaded image file instance
             $image = $model->uploadImage();
-
+            //$images = UploadedFile::getInstancesByName('images');
+            $images_add=[];
             if ($model->save()) {
                 // upload only if valid uploaded file instance found
                 if ($image !== false) {
-                    $path = $model->getImageFile();
+                    $path = $model->getImageFile($model->work_name);
                     $image->saveAs($path);
                 }
+
+                    $path2 = Yii::getAlias("@app/web/uploads/".$model->work_name.'/images/');
+//                    BaseFileHelper::createDirectory($path2);
+//                foreach ($images as $img){
+//                    $name = Yii::$app->security->generateRandomString().'.'.$img->extension;
+//                    $img->saveAs($path2 .DIRECTORY_SEPARATOR .$name);
+//                }
+                    try {
+                    if(is_dir($path2)) {
+                        $files = FileHelper::findFiles($path2);
+
+                        foreach ($files as $file) {
+
+                                $images_add[] = '<img src="/uploads/'. $model->work_name . '/images/' . basename($file) . '" width=250>';
+
+                        }
+                    }
+                }
+                catch(Exception $e){}
+
+
+
                 return $this->redirect(['view', 'id'=>$model->id]);
             } else {
                 // error in saving model
             }
         }
         return $this->render('create', [
-            'model'=>$model,
+            'model'=>$model
         ]);
+    }
+
+    public function actionFileUploadImages(){
+        if(Yii::$app->request->isPost){
+            $work_name = Yii::$app->request->post("work_name");
+            $path = Yii::getAlias('@app/web/uploads/'.$work_name.'/images/');
+                BaseFileHelper::createDirectory($path);
+            $file = UploadedFile::getInstanceByName('images');
+            $name = time().'.'.$file->extension;
+            $file->saveAs($path .DIRECTORY_SEPARATOR .$name);
+            sleep(1);
+            return true;
+
+        }
     }
 
 
@@ -98,7 +139,7 @@ class WorksController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $oldFile = $model->getImageFile();
+        $oldFile = $model->getImageFile($model->work_name);
         $oldAvatar = $model->work_image;
         $oldFileName = $model->work_name_image;
 
@@ -114,11 +155,20 @@ class WorksController extends Controller
 
             if ($model->save()) {
                 // upload only if valid uploaded file instance found
-                if ($image !== false && unlink($oldFile)) { // delete old and overwrite
-                    $path = $model->getImageFile();
-                    $image->saveAs($path);
+                if($oldFile!=null){
+                    if ($image !== false && unlink($oldFile)) { // delete old and overwrite
+                        $path = $model->getImageFile($model->work_name);
+                        $image->saveAs($path);
+                    }
+                } else{
+                    if($image !==false){
+                        $path = $model->getImageFile($model->work_name);
+                        $image->saveAs($path);
+                    }
                 }
-                return $this->redirect(['view', 'id'=>$model->_id]);
+
+
+                return $this->redirect(['view', 'id'=>$model->id]);
             } else {
                 // error in saving model
             }
@@ -141,7 +191,7 @@ class WorksController extends Controller
         // validate deletion and on failure process any exception
         // e.g. display an error message
         if ($model->delete()) {
-            if (!$model->deleteImage()) {
+            if (!$model->deleteImage($model->work_name)) {
                 Yii::$app->session->setFlash('error', 'Error deleting image');
             }
         }

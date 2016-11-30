@@ -10,7 +10,7 @@ class m161129_161826_tb_works extends Migration
   `id` int(11) NOT NULL PRIMARY KEY ,
   `work_name` varchar(200) NOT NULL,
   `work_description` varchar(200) DEFAULT NULL,
-  `worl_url` varchar(100) DEFAULT NULL,
+  `work_url` varchar(100) DEFAULT NULL,
   `work_tech` varchar(100) DEFAULT NULL,
   `work_image` varchar(200) DEFAULT NULL,
   `work_name_image` varchar(100) DEFAULT NULL,
