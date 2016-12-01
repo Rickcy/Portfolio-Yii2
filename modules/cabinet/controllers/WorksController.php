@@ -55,6 +55,7 @@ class WorksController extends Controller
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -64,54 +65,39 @@ class WorksController extends Controller
      * Creates a new Works model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidParamException
      */
     public function actionCreate()
     {
         $model = new Works();
-        $image=[];
-        $images=[];
+
         if ($model->load(Yii::$app->request->post()) ) {
+            if (Yii::$app->request->isPost) {
+                $model->image_file = UploadedFile::getInstance($model, 'image_file');
+                $model->image_files = UploadedFile::getInstances($model, 'image_files');
 
-
-            $dir_name =$model->work_name;
-            //Single upload image
-            $file = $model->file=UploadedFile::getInstance($model,'file');
-            if($file){
-
-                $img_name ='general.'.$file->extension;
-                $path_general = Yii::getAlias("@app/web/uploads/".$dir_name);
-
-                //Create Directory
-                BaseFileHelper::createDirectory($path_general);
-
-                //Upload to server
-                $file->saveAs($path_general .DIRECTORY_SEPARATOR .$img_name);
-                //Write in database
-                $model->work_image ='uploads/'.$dir_name.'/'.$img_name;
-            }
-
-
-            
-            //Multiple upload image
-            $images = $model->files=UploadedFile::getInstancesByName('files');
-            if($images){
-            $path_images = Yii::getAlias("@app/web/uploads/".$dir_name.'/images');
-
-            //Create Directory
-            BaseFileHelper::createDirectory($path_images);
-            foreach ($images as $img){
-            $images_name = time().'.'.$img->extension;
-                $img->saveAs($path_images .DIRECTORY_SEPARATOR .$images_name);
+                if ($model->image_file){
+                    $model->uploadImage();
+                 } else{
+                    $model->defaultImage();
                 }
+                if ($model->image_files) {
+
+                    $model->uploadImages();
+                }
+
+
+
             }
 
 
-            /// Save all
+
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id,'image'=>$image]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,'image'=>$image
+                'model' => $model
             ]);
         }
     }
@@ -121,39 +107,28 @@ class WorksController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws \yii\base\InvalidParamException
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) ) {
+            if (Yii::$app->request->isPost) {
+                $model->image_file = UploadedFile::getInstance($model, 'image_file');
+                $model->image_files = UploadedFile::getInstances($model, 'image_files');
 
-
-            $dir_name =$model->work_name;
-            $file = $model->file=UploadedFile::getInstance($model,'file');
-            if ($file){
-                $img_name ='general.'.$file->extension;
-                $path = Yii::getAlias("@app/web/uploads/".$dir_name);
-                BaseFileHelper::createDirectory($path);
-                $file->saveAs($path .DIRECTORY_SEPARATOR .$img_name);
-
-
-                $model->work_image ='uploads/'.$dir_name.'/'.$img_name;
-
-            }
-            $images = $model->files=UploadedFile::getInstancesByName('images');
-            if($images){
-                $path_images = Yii::getAlias("@app/web/uploads/".$dir_name.'/images');
-
-                //Create Directory
-                BaseFileHelper::createDirectory($path_images);
-                foreach ($images as $img){
-                $images_name = time().'.'.$img->extension;
-                    $img->saveAs($path_images .DIRECTORY_SEPARATOR .$images_name);
+                if ($model->image_file){
+                    $model->uploadImage();
                 }
+                if ($model->image_files) {
+
+                    $model->uploadImages();
+                }
+
+
+
             }
-
-
 
 
 

@@ -12,7 +12,7 @@ use yii\helpers\Html;
 
 <div class="works-form">
 
-    <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'work_name')->textInput(['maxlength' => true]) ?>
 
@@ -22,37 +22,47 @@ use yii\helpers\Html;
 
     <?= $form->field($model, 'work_tech')->textInput(['maxlength' => true]) ?>
 
-<!--    --><?//= $form->field($model, 'file')->fileInput()
-    echo $form->field($model, 'file')->widget(FileInput::className(),[
-        'options' => [
-            'accept' => 'image/*',
-        ],
-        'pluginOptions' => [
-            'allowedFileExtensions' =>  ['jpg', 'png','gif'],
-            //'initialPreview' => '<div><img class="img-responsive" width="230px" src=/'.$model->work_image.' alt="">',
-            'showUpload' => true,
-            'showRemove' => false,
-            'dropZoneEnabled' => false
-        ]
-    ]);
-    echo Html::label('Images');
-
-    echo FileInput::widget([
-        'name' => 'files',
-        'options' => [
-            'accept' => 'image/*',
-            'multiple'=>true
-        ],
-        'pluginOptions' => [
+    <?= $form->field($model, 'image_file')->fileInput() ?>
 
 
-            'allowedFileExtensions' =>  ['jpg', 'png','gif'],
+    <?= $form->field($model, 'image_files[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
-            'showUpload' => true,
-            'showRemove' => false,
-            'dropZoneEnabled' => false
-        ]
-    ]);
+<!--    --><?
+
+    //
+    //
+    //
+    //= $form->field($model, 'file')->fileInput()
+//    echo $form->field($model, 'file')->widget(FileInput::className(),[
+//        'options' => [
+//            'accept' => 'image/*',
+//        ],
+//        'pluginOptions' => [
+//            'allowedFileExtensions' =>  ['jpg', 'png','gif'],
+//            //'initialPreview' => '<div><img class="img-responsive" width="230px" src=/'.$model->work_image.' alt="">',
+//            'showUpload' => true,
+//            'showRemove' => false,
+//            'dropZoneEnabled' => false
+//        ]
+//    ]);
+//    echo Html::label('Images');
+//
+//    echo FileInput::widget([
+//        'name' => 'files',
+//        'options' => [
+//            'accept' => 'image/*',
+//            'multiple'=>true
+//        ],
+//        'pluginOptions' => [
+//
+//
+//            'allowedFileExtensions' =>  ['jpg', 'png','gif'],
+//
+//            'showUpload' => true,
+//            'showRemove' => false,
+//            'dropZoneEnabled' => false
+//        ]
+//    ]);
     ?>
 
 
@@ -64,5 +74,5 @@ use yii\helpers\Html;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+   
 </div>
