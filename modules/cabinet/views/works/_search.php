@@ -27,8 +27,6 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'work_image') ?>
 
-    <?php // echo $form->field($model, 'work_name_image') ?>
-
     <?php // echo $form->field($model, 'showMain') ?>
 
     <div class="form-group">

@@ -13,7 +13,6 @@ class m161129_161826_tb_works extends Migration
   `work_url` varchar(100) DEFAULT NULL,
   `work_tech` varchar(100) DEFAULT NULL,
   `work_image` varchar(200) DEFAULT NULL,
-  `work_name_image` varchar(100) DEFAULT NULL,
   `showMain` tinyint(1) DEFAULT \'0\'
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 ALTER TABLE `works`

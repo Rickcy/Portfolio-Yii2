@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\SearchWorks */
@@ -30,21 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'work_description',
             'work_url:url',
             'work_tech',
-
-            [
-
-                'format' => 'raw',
-                'value' => function($data){
-                    return Html::img(Url::to(Yii::$app->urlManager->baseUrl . '/uploads/'.$data->work_name.'/'.$data->work_image),[
-
-
-                       'style'=>'width:50%;text-align:center'
-
-                    ]);
-                },
-            ],
-//             'work_name_image',
-//             'showMain',
+            // 'work_image',
+            // 'showMain',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
