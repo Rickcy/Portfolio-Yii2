@@ -1,9 +1,9 @@
-(function () {
+$(function () {
 
-    $(".screen-height").height($(window).height());
+    $(".screen-height").height($(window).height()-50);
 
     $(window).resize(function(){
-        $(".screen-height").height($(window).height());
+        $(".screen-height").height($(window).height()-50);
     });
 
 
@@ -23,7 +23,7 @@
             });
         });
     },{offset:'80%'});
-})();
+});
 wow = new WOW({
     mobile: false
 });

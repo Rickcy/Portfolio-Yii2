@@ -52,7 +52,7 @@ $this->title = 'My Works | Personal Page Portfolio';
                     </a>
                 <?endforeach;?>
                 <?endif;?>
-                <?if ($all_works):?>
+                <?if (!$all_works):?>
                     <div class="row">
 
                         <div class="col-sm-6 col-sm-offset-3">
