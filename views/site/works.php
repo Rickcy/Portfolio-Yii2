@@ -35,7 +35,7 @@ $this->title = 'My Works | Personal Page Portfolio';
                 <?
                 foreach ($all_works as $work):
                 ?>
-                    <a href="<?Url::to('site/works/view-works?id='.$work['id'])?>">
+                    <a href="<?=Url::to('/site/view-work?id='.$work['id'])?>">
                 <div class="col-xs-12 col-sm-4 col-md-4">
 
                     <div class="grid wow zoomIn animated" style="visibility: visible; animation-name: zoomIn;">
