@@ -40,5 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'showMain',
         ],
     ]) ?>
-
+    <?$images_files =$model->viewsImage($model->work_name);
+    ?>
+    <?if ($images_files):?>
+        <?
+        foreach ($images_files as $img):?>
+            <?=$img ?>
+        <?endforeach;?>
+    <?endif;?>
 </div>

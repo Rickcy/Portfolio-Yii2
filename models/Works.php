@@ -3,8 +3,10 @@
 namespace app\models;
 
 use Yii;
+use yii\base\Exception;
 use yii\db\ActiveRecord;
 use yii\helpers\BaseFileHelper;
+use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 /**
  * This is the model class for table "works".
@@ -64,7 +66,24 @@ class Works extends ActiveRecord
 
     }
 
-    public function viewsImage(){
+    public function viewsImage($work_name){
+        $images=[];
+        $files =null;
+
+        $path = Yii::getAlias('@app/web/uploads/'.$work_name.'/images');
+        try {
+            if(is_dir($path)) {
+                $files = FileHelper::findFiles($path);
+
+                foreach ($files as $file) {
+                        $images[]='<img class="img-thumbnail" src="/uploads/'.$work_name.'/images/'.basename($file).'" width=200px>';
+
+
+                }
+            }
+        }
+        catch(Exception $e){}
+        return $images;
         
     }
 

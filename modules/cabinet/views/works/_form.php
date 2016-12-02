@@ -21,10 +21,27 @@ use yii\helpers\Html;
     <?= $form->field($model, 'work_url')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'work_tech')->textInput(['maxlength' => true]) ?>
+    
+    <?if ($model->work_image):?>
 
+    <img class="img-thumbnail" src="/<?=$model->work_image ?>" width="250px" alt="">
+    
+    <?endif;?>
+    
     <?= $form->field($model, 'image_file')->fileInput() ?>
 
 
+
+    <?$images_files =$model->viewsImage($model->work_name);
+    ?>
+    <?if ($images_files):?>
+    <?
+    foreach ($images_files as $img):?>
+        <?=$img ?>
+    <?endforeach;?>
+    <?endif;?>
+    
+    
     <?= $form->field($model, 'image_files[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
 <!--    --><?
