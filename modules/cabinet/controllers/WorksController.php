@@ -102,6 +102,8 @@ class WorksController extends Controller
         }
     }
 
+
+
     /**
      * Updates an existing Works model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -155,6 +157,36 @@ class WorksController extends Controller
         $path =Yii::getAlias('@app/web/uploads/'.$model->work_name);
         BaseFileHelper::removeDirectory($path);
         return $this->redirect(['index']);
+    }
+
+
+    public function actionImage($id)
+    {
+        $model = Works::findOne($id);
+        if (Yii::$app->request->isPost) {
+
+            if ($model->work_name) {
+                $path = Yii::getAlias('@app/web/uploads/' . $model->work_name . '/general_image.jpg');
+                unlink($path);
+                $model->work_image = 'uploads/default_works.jpg';
+
+            }
+        }
+        $model->save();
+    }
+    
+    
+    
+    public function actionImages($id,$basename){
+
+        $model= Works::findOne($id);
+
+        if (Yii::$app->request->isPost) {
+            $path = Yii::getAlias('@app/web/uploads/'.$model->work_name.'/images/'.$basename.'.png');
+            unlink($path);
+            
+        }
+        
     }
 
     /**

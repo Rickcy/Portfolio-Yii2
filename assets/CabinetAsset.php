@@ -10,6 +10,7 @@ namespace app\assets;
 
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 class CabinetAsset extends AssetBundle
 {
@@ -19,15 +20,16 @@ class CabinetAsset extends AssetBundle
         'css/styles.css'
     ];
     public $js = [
-
-
-
+        'js/cabinet.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
+        'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset'
     ];
-
+    public $jsOptions =[
+        'position'=> View::POS_HEAD
+    ];
 
 }

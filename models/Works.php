@@ -41,8 +41,9 @@ class Works extends ActiveRecord
     {
         return [
             [['work_name'], 'required'],
+            [['work_description'], 'string', 'max' => 1000],
             [['showMain'], 'integer'],
-            [['work_name', 'work_description', 'work_image'], 'string', 'max' => 200],
+            [['work_name', 'work_image'], 'string', 'max' => 200],
             [['work_url', 'work_tech'], 'string', 'max' => 100],
             [['image_file'],'file',],
             [['image_files'],'file','maxFiles' => 10]
@@ -76,7 +77,7 @@ class Works extends ActiveRecord
                 $files = FileHelper::findFiles($path);
 
                 foreach ($files as $file) {
-                        $images[]='<img class="img-thumbnail" src="/uploads/'.$work_name.'/images/'.basename($file).'" width=200px>';
+                        $images[]=$file;
 
 
                 }
@@ -98,7 +99,7 @@ class Works extends ActiveRecord
         BaseFileHelper::createDirectory($path);
         if ($this->validate()) {
             foreach ($this->image_files as $file) {
-                $file->saveAs('uploads/'.$this->work_name.'/images/'. $file->baseName.time() . '.' . $file->extension);
+                $file->saveAs('uploads/'.$this->work_name.'/images/'. $file->baseName.time() . '.png' );
             }
             return true;
         } else {

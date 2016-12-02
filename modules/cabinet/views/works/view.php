@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Works */
 
-$this->title = $model->id;
+$this->title = $model->work_name;
 $this->params['breadcrumbs'][] = ['label' => 'Works', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -45,7 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?if ($images_files):?>
         <?
         foreach ($images_files as $img):?>
-            <?=$img ?>
+            <span id="image<?=rtrim(basename($img),'.png')?>" > <img class="img-thumbnail" width=200px src="/uploads/<?=$model->work_name;?>/images/<?=basename($img)?>" >
+        <a href="javascript:void(0)" onclick="deleteImages(<?=$model->id?>,<?=rtrim(basename($img),'.png')?>)" >x</a>
+       </span>
         <?endforeach;?>
     <?endif;?>
 </div>

@@ -16,16 +16,17 @@ use yii\helpers\Html;
 
     <?= $form->field($model, 'work_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'work_description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'work_description')->textarea(['rows'=>6]) ?>
 
     <?= $form->field($model, 'work_url')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'work_tech')->textInput(['maxlength' => true]) ?>
     
     <?if ($model->work_image):?>
-
+    <div class="image<?=$model->id?>" style="position: relative">
     <img class="img-thumbnail" src="/<?=$model->work_image ?>" width="250px" alt="">
-    
+        <a href="#" onclick="deleteImage(<?=$model->id ?>)">x</a>
+    </div>
     <?endif;?>
     
     <?= $form->field($model, 'image_file')->fileInput() ?>
@@ -37,8 +38,10 @@ use yii\helpers\Html;
     <?if ($images_files):?>
     <?
     foreach ($images_files as $img):?>
-        <?=$img ?>
-    <?endforeach;?>
+       <span id="image<?=rtrim(basename($img),'.png')?>" > <img class="img-thumbnail" width=200px src="/uploads/<?=$model->work_name;?>/images/<?=basename($img)?>" >
+        <a href="javascript:void(0)" onclick="deleteImages(<?=$model->id?>,<?=rtrim(basename($img),'.png')?>)" >x</a>
+       </span>
+           <?endforeach;?>
     <?endif;?>
     
     

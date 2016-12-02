@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use app\component\Common;
 use app\models\ContactForm;
+use app\models\Works;
 use Yii;
+use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -79,12 +81,27 @@ class SiteController extends Controller
 
     public function actionWorks()
     {
-        return $this->render('works');
+        $query = new Query();
+        $query_works =$query->from('works')->orderBy('id desc');
+        $works=$query_works->where('showMain= 1');
+        $all_works = $works->all();
+
+        return $this->render('works',[
+            'all_works'=>$all_works
+        ]);
     }
 
     public function actionSkills(){
 
-        return $this->render('skills');
+        $query = new Query();
+        $query_skills =$query->from('skills');
+        $skills=$query_skills->all();
+        $count =$query_skills->count();
+        
+        
+        return $this->render('skills',[
+        'skills'=>$skills,'count'=>$count
+        ]);
     }
 
 
@@ -105,6 +122,14 @@ class SiteController extends Controller
         }
 
         return $this->render('feedback',['model'=>$model]);
+    }
+
+    public function actionViewWork($id){
+        $model=Works::findOne($id);
+
+        return $this->render('view_works',[
+           'model'=>$model
+        ]);
     }
 
 

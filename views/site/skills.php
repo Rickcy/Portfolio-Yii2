@@ -87,7 +87,7 @@ $this->title = 'My Skills | Personal Page Portfolio';
 <section class="pfblock pfblock-gray" id="skills">
 
 
-
+    <?if ($skills):?>
         <div class="row skills">
             <div class="container">
             <div class="row">
@@ -103,46 +103,35 @@ $this->title = 'My Skills | Personal Page Portfolio';
                 </div>
 
             </div><!-- .row -->
-            <div class="col-sm-6 col-md-2 text-center">
+
+                <? foreach ($skills as $skill):?>
+            <div class="col-xs-6 col-md-<?=(integer)(12/$count)?> col-md-offset-  text-center" style="margin-left: <?=12%$count?>%">
 						<span data-percent="55" class="chart easyPieChart" style="width: 140px; height: 140px; line-height: 140px;">
-                            <span class="percent">55</span>
+                            <span class="percent"><?=$skill['skill_percent'];?></span>
                         </span>
-                <h4 class="text-center">Photoshop|Illustrator</h4>
-            </div>
-            <div class="col-sm-6 col-md-2 text-center">
-						<span data-percent="90" class="chart easyPieChart" style="width: 140px; height: 140px; line-height: 140px;">
-                            <span class="percent">90</span>
-                        </span>
-                <h4 class="text-center">HTML|CSS</h4>
-            </div>
-            <div class="col-sm-6 col-md-2 text-center">
-						<span data-percent="65" class="chart easyPieChart" style="width: 140px; height: 140px; line-height: 140px;">
-                            <span class="percent">65</span>
-                        </span>
-                <h4 class="text-center">AngularJS</h4>
-            </div>
-            <div class="col-sm-6 col-md-2 text-center">
-						<span data-percent="80" class="chart easyPieChart" style="width: 140px; height: 140px; line-height: 140px;">
-                            <span class="percent">80</span>
-                        </span>
-                <h4 class="text-center">Javascript|Jquery</h4>
-            </div>
-            <div class="col-sm-6 col-md-2 text-center">
-						<span data-percent="60" class="chart easyPieChart" style="width: 140px; height: 140px; line-height: 140px;">
-                            <span class="percent">60</span>
-                        </span>
-                <h4 class="text-center">PHP|Mysql</h4>
+                <h4 class="text-center"><?=$skill['skill_name']?></h4>
             </div>
 
-            <div class="col-sm-6 col-md-2 text-center">
-						<span data-percent="50" class="chart easyPieChart" style="width: 140px; height: 140px; line-height: 140px;">
-                            <span class="percent">50</span>
-                        </span>
-                <h4 class="text-center">Java|Grails|SpringMVC</h4>
-            </div>
+                <?endforeach;?>
+            <?endif;?>
+                <?if (!$skills):?>
+                    <div class="row">
+
+                        <div class="col-sm-6 col-sm-offset-3">
+
+                            <div class="pfblock-header wow fadeInUp">
+                                <h2 class="pfblock-title">Sorry Skills is Empty</h2>
+                                <div class="pfblock-line"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                <?endif;?>
 
 
-        </div><!--End row -->
+        </div>
 </div>
 
 
