@@ -1,6 +1,5 @@
 $(document).ready(function () {
-
-
+ 
 
 
 
@@ -14,6 +13,10 @@ function deleteImage($id) {
         type: "POST",
         success: function () {
             $divImage.remove()
+        },
+        error: function () {
+            console.log('не удален');
+            console.log(this.url)
         }
     });
 }
@@ -22,7 +25,7 @@ function deleteImages($id,$basename) {
          console.log($basename);
 
     var $imageName = $('#image'+$basename);
-   
+
     $.ajax({
         url: 'images?id='+$id+'&basename='+$basename,
         type: "POST",
@@ -31,7 +34,10 @@ function deleteImages($id,$basename) {
             console.log('файл удален')
         },
         error: function () {
+
             console.log('файл не удален');
+            console.log(this.url);
+            console.log($imageName);
         }
     });
 }

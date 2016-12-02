@@ -45,9 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?if ($images_files):?>
         <?
         foreach ($images_files as $img):?>
-            <span id="image<?=rtrim(basename($img),'.png')?>" > <img class="img-thumbnail" width=200px src="/uploads/<?=$model->work_name;?>/images/<?=basename($img)?>" >
-        <a href="javascript:void(0)" onclick="deleteImages(<?=$model->id?>,<?=rtrim(basename($img),'.png')?>)" >x</a>
+            <span id="image<?=rtrim(basename($img),'.png')?>" > <img class="img-thumbnail" width=200px src="/uploads/<?=$name =str_replace(' ','',$model->work_name);?>/images/<?=basename($img)?>" >
+        <a href="javascript:void(0)" onclick='deleteImages(<?=$model->id?>,"<?=rtrim(basename($img),'.png')?>")' >x</a>
        </span>
+           
         <?endforeach;?>
     <?endif;?>
 </div>
+

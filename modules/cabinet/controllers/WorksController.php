@@ -94,7 +94,7 @@ class WorksController extends Controller
 
 
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index',]);
         } else {
             return $this->render('create', [
                 'model' => $model
@@ -135,7 +135,7 @@ class WorksController extends Controller
 
 
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -148,13 +148,18 @@ class WorksController extends Controller
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws \yii\base\ErrorException
+     * @throws \yii\base\InvalidParamException
+     * @throws \Exception
+     * @throws \yii\web\NotFoundHttpException
      */
     public function actionDelete($id)
     {
         $model =Works::findOne($id);
-
+        $w_n =$model->work_name;
+        $name =str_replace(' ','',$w_n);
         $this->findModel($id)->delete();
-        $path =Yii::getAlias('@app/web/uploads/'.$model->work_name);
+        $path =Yii::getAlias('@app/web/uploads/'.$name);
         BaseFileHelper::removeDirectory($path);
         return $this->redirect(['index']);
     }
@@ -163,10 +168,12 @@ class WorksController extends Controller
     public function actionImage($id)
     {
         $model = Works::findOne($id);
-        if (Yii::$app->request->isPost) {
 
+        if (Yii::$app->request->isPost) {
             if ($model->work_name) {
-                $path = Yii::getAlias('@app/web/uploads/' . $model->work_name . '/general_image.jpg');
+                $w_n =$model->work_name;
+                $name =str_replace(' ','',$w_n);
+                $path = Yii::getAlias('@app/web/uploads/' . $name . '/general_image.jpg');
                 unlink($path);
                 $model->work_image = 'uploads/default_works.jpg';
 
@@ -180,9 +187,10 @@ class WorksController extends Controller
     public function actionImages($id,$basename){
 
         $model= Works::findOne($id);
-
+        $w_n =$model->work_name;
+        $name =str_replace(' ','',$w_n);
         if (Yii::$app->request->isPost) {
-            $path = Yii::getAlias('@app/web/uploads/'.$model->work_name.'/images/'.$basename.'.png');
+            $path = Yii::getAlias('@app/web/uploads/'.$name.'/images/'.$basename.'.png');
             unlink($path);
             
         }

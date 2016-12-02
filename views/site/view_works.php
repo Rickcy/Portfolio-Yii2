@@ -26,8 +26,8 @@ $this->title = $model->work_name;
                 <?if ($images_files):?>
                     <?
                     foreach ($images_files as $img):?>
-                        <span id="image<?=rtrim(basename($img),'.png')?>" > <img class="img-thumbnail" style="margin: 3%" width=200px src="/uploads/<?=$model->work_name;?>/images/<?=basename($img)?>" >
-                         </span>
+                <a class="fancybox" rel="group" href="/uploads/<?=str_replace(' ','',$model->work_name);?>/images/<?=basename($img)?>"><img class="img-thumbnail" style="margin: 3%" width=25% src="/uploads/<?=str_replace(' ','',$model->work_name);?>/images/<?=basename($img)?>" ></a>
+
                     <?endforeach;?>
                 <?endif;?>
 

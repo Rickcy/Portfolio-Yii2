@@ -22,7 +22,8 @@ class AppAsset extends AssetBundle
         'css/animate.css',
         'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css',
         'css/simple-line-icons.css',
-
+        'fancybox/source/jquery.fancybox.css?v=2.1.5',
+        'fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7'
     ];
     public $js = [
         'js/wow.min.js',
@@ -32,7 +33,11 @@ class AppAsset extends AssetBundle
         'js/script.js',
         'js/jquery.parallax-1.1.3.js',
        
-        'js/modernizr.custom.js'
+        'js/modernizr.custom.js',
+        'fancybox/source/jquery.fancybox.pack.js?v=2.1.5',
+        'fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5',
+        'fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6',
+        'fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7'
 
 
 

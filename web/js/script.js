@@ -6,6 +6,10 @@ $(function () {
         $(".screen-height").height($(window).height()-50);
     });
 
+    $(".fancybox").fancybox({
+        openEffect	: 'none',
+        closeEffect	: 'none'
+    });
 
 
 

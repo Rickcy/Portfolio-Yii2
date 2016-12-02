@@ -41,7 +41,7 @@ class Works extends ActiveRecord
     {
         return [
             [['work_name'], 'required'],
-            [['work_description'], 'string', 'max' => 1000],
+            [['work_description'], 'string', 'max' => 2000],
             [['showMain'], 'integer'],
             [['work_name', 'work_image'], 'string', 'max' => 200],
             [['work_url', 'work_tech'], 'string', 'max' => 100],
@@ -54,12 +54,15 @@ class Works extends ActiveRecord
 
     public function uploadImage()
     {
-        $path = Yii::getAlias('@app/web/uploads/'.$this->work_name);
+
+        $w_n =$this->work_name;
+        $name =str_replace(' ','',$w_n);
+        $path = Yii::getAlias('@app/web/uploads/'.$name);
         BaseFileHelper::createDirectory($path);
 
         if ($this->validate()) {
-            $this->image_file->saveAs('uploads/'.$this->work_name.'/general_image.' . $this->image_file->extension);
-            $this->work_image='uploads/'.$this->work_name.'/general_image.' . $this->image_file->extension;
+            $this->image_file->saveAs('uploads/'.$name.'/general_image.' . $this->image_file->extension);
+            $this->work_image='uploads/'.$name.'/general_image.' . $this->image_file->extension;
             return true;
         } else {
             return false;
@@ -68,10 +71,11 @@ class Works extends ActiveRecord
     }
 
     public function viewsImage($work_name){
+        $name =str_replace(' ','',$work_name);
         $images=[];
         $files =null;
 
-        $path = Yii::getAlias('@app/web/uploads/'.$work_name.'/images');
+        $path = Yii::getAlias('@app/web/uploads/'.$name.'/images');
         try {
             if(is_dir($path)) {
                 $files = FileHelper::findFiles($path);
@@ -95,11 +99,15 @@ class Works extends ActiveRecord
 
     public function uploadImages()
     {
-        $path = Yii::getAlias('@app/web/uploads/'.$this->work_name.'/images/');
+
+        $w_n =$this->work_name;
+        $name =str_replace(' ','',$w_n);
+        $path = Yii::getAlias('@app/web/uploads/'.$name.'/images/');
         BaseFileHelper::createDirectory($path);
         if ($this->validate()) {
             foreach ($this->image_files as $file) {
-                $file->saveAs('uploads/'.$this->work_name.'/images/'. $file->baseName.time() . '.png' );
+
+                $file->saveAs('uploads/'.$name.'/images/'. $file->baseName.time() .'.png' );
             }
             return true;
         } else {
