@@ -76,16 +76,8 @@ class WorksController extends Controller
             if (Yii::$app->request->isPost) {
                 $model->image_file = UploadedFile::getInstance($model, 'image_file');
                 $model->image_files = UploadedFile::getInstances($model, 'image_files');
+                $model->uploadImages();
 
-                if ($model->image_file){
-                    $model->uploadImage();
-                 } else{
-                    $model->defaultImage();
-                }
-                if ($model->image_files) {
-
-                    $model->uploadImages();
-                }
 
 
 
@@ -93,7 +85,7 @@ class WorksController extends Controller
 
 
 
-            $model->save();
+
             return $this->redirect(['index',]);
         } else {
             return $this->render('create', [
@@ -120,21 +112,16 @@ class WorksController extends Controller
                 $model->image_file = UploadedFile::getInstance($model, 'image_file');
                 $model->image_files = UploadedFile::getInstances($model, 'image_files');
 
-                if ($model->image_file){
-                    $model->uploadImage();
-                }
-                if ($model->image_files) {
-
+                
                     $model->uploadImages();
-                }
-
+                
 
 
             }
 
 
 
-            $model->save();
+
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -173,7 +160,7 @@ class WorksController extends Controller
             if ($model->work_name) {
                 $w_n =$model->work_name;
                 $name =str_replace(' ','',$w_n);
-                $path = Yii::getAlias('@app/web/uploads/' . $name . '/general_image.jpg');
+                $path = Yii::getAlias('@app/web/uploads/' . $name . '/general_image.png');
                 unlink($path);
                 $model->work_image = 'uploads/default_works.jpg';
 

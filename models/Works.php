@@ -45,30 +45,14 @@ class Works extends ActiveRecord
             [['showMain'], 'integer'],
             [['work_name', 'work_image'], 'string', 'max' => 200],
             [['work_url', 'work_tech'], 'string', 'max' => 100],
-            [['image_file'],'file',],
-            [['image_files'],'file','maxFiles' => 10]
+            [['image_file'],'file','extensions' => ['jpg','png','gif']],
+            [['image_files'],'file','extensions' => ['jpg','png','gif'],'maxFiles' => 10]
         ];
     }
 
 
 
-    public function uploadImage()
-    {
 
-        $w_n =$this->work_name;
-        $name =str_replace(' ','',$w_n);
-        $path = Yii::getAlias('@app/web/uploads/'.$name);
-        BaseFileHelper::createDirectory($path);
-
-        if ($this->validate()) {
-            $this->image_file->saveAs('uploads/'.$name.'/general_image.' . $this->image_file->extension);
-            $this->work_image='uploads/'.$name.'/general_image.' . $this->image_file->extension;
-            return true;
-        } else {
-            return false;
-        }
-
-    }
 
     public function viewsImage($work_name){
         $name =str_replace(' ','',$work_name);
@@ -104,16 +88,38 @@ class Works extends ActiveRecord
         $name =str_replace(' ','',$w_n);
         $path = Yii::getAlias('@app/web/uploads/'.$name.'/images/');
         BaseFileHelper::createDirectory($path);
-        if ($this->validate()) {
-            foreach ($this->image_files as $file) {
 
-                $file->saveAs('uploads/'.$name.'/images/'. $file->baseName.time() .'.png' );
+        if ($this->validate()) {
+
+            if($this->image_file){
+
+            $this->work_image='uploads/'.$name.'/general_image.png';
+            $this->save();
+            $this->image_file->saveAs('uploads/'.$name.'/general_image.png');
             }
+                if ($this->image_files) {
+
+                    if(!$this->image_file&&$this->work_image===null){
+                        $this->defaultImage();
+                        $this->save();
+                    }
+                    foreach ($this->image_files as $file) {
+
+                        $file->saveAs('uploads/'.$name.'/images/'. $file->baseName.time() .'.png' );
+                    }
+                
+            }
+            if(!$this->image_files&&!$this->work_image===null){
+                $this->defaultImage();
+                $this->save();
+            }
+        
+
             return true;
         } else {
             return false;
         }
-            
+
 
     }
 

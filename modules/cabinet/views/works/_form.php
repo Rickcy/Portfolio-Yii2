@@ -11,7 +11,7 @@ use yii\helpers\Html;
 ?>
 
 <div class="works-form">
-
+    
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'work_name')->textInput(['maxlength' => true]) ?>
