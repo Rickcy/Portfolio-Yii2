@@ -9,6 +9,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $password;
     public $authKey;
     public $accessToken;
+    public $role;
 
     private static $users = [
         '100' => [
@@ -17,6 +18,15 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'password' => 'Rickcy27',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
+            'role'=>'ROLE_ADMIN'
+        ],
+        '101' => [
+            'id' => '101',
+            'username' => 'Rickcy1',
+            'password' => 'Rickcy271',
+            'authKey' => 'test101key',
+            'accessToken' => '101-token',
+            'role'=>'ROLE_USER'
         ]
     ];
 
@@ -58,6 +68,32 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         }
 
         return null;
+    }
+
+
+    public static function checkRole($roles=[]){
+
+        $model=null;
+        $id =\Yii::$app->user->getId();
+        $user = User::findIdentity($id);
+
+        foreach ($roles as $role){
+            if ($role===$user->role){
+                $model=true;
+            } else{
+                $model=false;
+            }
+        }
+
+     
+        return $model;
+
+    }
+
+
+    public function getRole(){
+
+        return $this->role;
     }
 
     /**

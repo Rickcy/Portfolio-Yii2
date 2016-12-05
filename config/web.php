@@ -25,6 +25,7 @@ $config = [
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
+            
             'errorAction' => 'site/error',
         ],
         'mailer' => [

@@ -2,11 +2,14 @@
 
 namespace app\modules\cabinet\controllers;
 
+use app\controllers\AuthController;
+use app\models\User;
 use Yii;
 use app\models\Works;
 use app\models\SearchWorks;
 use yii\helpers\BaseFileHelper;
-use yii\web\Controller;
+
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -14,29 +17,24 @@ use yii\web\UploadedFile;
 /**
  * WorksController implements the CRUD actions for Works model.
  */
-class WorksController extends Controller
+class WorksController extends AuthController
 {
 
+
+
+    
     public $layout ='/cabinet';
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
+  
     /**
      * Lists all Works models.
      * @return mixed
      */
+
+    
+    
     public function actionIndex()
     {
         $searchModel = new SearchWorks();
@@ -70,6 +68,8 @@ class WorksController extends Controller
      */
     public function actionCreate()
     {
+
+
         $model = new Works();
 
         if ($model->load(Yii::$app->request->post()) ) {

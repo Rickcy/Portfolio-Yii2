@@ -2,33 +2,41 @@
 
 namespace app\modules\cabinet\controllers;
 
+use app\controllers\AuthController;
+use app\models\User;
 use Yii;
 use app\models\Skills;
 use app\models\SkillsSearch;
-use yii\web\Controller;
+
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * SkillsController implements the CRUD actions for Skills model.
  */
-class SkillsController extends Controller
+class SkillsController extends AuthController
 {
+
+
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            if (!User::checkRole(['ROLE_ADMIN'])) {
+                throw new ForbiddenHttpException('Доступ запрещен');
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     public $layout = '/cabinet';
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+   
 
     /**
      * Lists all Skills models.

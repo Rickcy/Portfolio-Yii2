@@ -11,7 +11,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 
 
-
+$id = Yii::$app->user->id;
+$user = \app\models\User::findIdentity($id);
 CabinetAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -28,6 +29,16 @@ CabinetAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+
+
+
+    <?
+    if ($user->checkRole(['ROLE_ADMIN'])):?>
+<h1>asdasd</h1>
+    <?endif;?>
+
+
+
 
     <?php
     NavBar::begin([

@@ -2,13 +2,18 @@
 
 namespace app\modules\cabinet\controllers;
 
-use yii\web\Controller;
+use app\controllers\AuthController;
+use app\models\User;
+
 
 /**
  * Default controller for the `cabinet` module
  */
-class DefaultController extends Controller
+class DefaultController extends AuthController
 {
+
+
+    
     public $layout = '/cabinet';
     /**
      * Renders the index view for the module
@@ -16,6 +21,17 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $user = User::findIdentity(\Yii::$app->user->id);
+        $model='';
+        $role =User::checkRole(['ROLE_ADMIN']);
+            if(!$role){
+                $model.='Доступ закрыт';
+            }
+        if($role){
+            $model.='Доступ открыт';
+        }
+
+
+        return $this->render('index',['model'=>$model]);
     }
 }
