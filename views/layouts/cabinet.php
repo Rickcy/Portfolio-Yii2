@@ -32,10 +32,8 @@ CabinetAsset::register($this);
 
 
 
-    <?
-    if ($user->checkRole(['ROLE_ADMIN'])):?>
-<h1>asdasd</h1>
-    <?endif;?>
+
+
 
 
 

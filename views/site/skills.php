@@ -109,7 +109,7 @@ $this->title = 'My Skills | Personal Page Portfolio';
 						<span data-percent="55" class="chart easyPieChart" style="width: 140px; height: 140px; line-height: 140px;">
                             <span class="percent"><?=$skill['skill_percent'];?></span>
                         </span>
-                <h4 class="text-center"><?=$skill['skill_name']?></h4>
+                <h5 class="text-center"><?=$skill['skill_name']?></h5>
             </div>
 
                 <?endforeach;?>
